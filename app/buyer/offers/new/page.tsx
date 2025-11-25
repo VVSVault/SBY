@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -36,7 +36,7 @@ const offerSchema = z.object({
 
 type OfferFormData = z.infer<typeof offerSchema>;
 
-export default function NewOfferPage() {
+function NewOfferPageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const listingId = searchParams.get('listingId');
@@ -770,5 +770,13 @@ export default function NewOfferPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function NewOfferPage() {
+  return (
+    <Suspense fallback={<div className="p-8 text-center">Loading...</div>}>
+      <NewOfferPageContent />
+    </Suspense>
   );
 }
