@@ -1,0 +1,77 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Scalloped outer circle -->
+  <defs>
+    <radialGradient id="outerGrad" cx="50%" cy="50%">
+      <stop offset="0%" style="stop-color:#5eced6;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#3d9ea5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2d7e85;stop-opacity:1" />
+    </radialGradient>
+    <radialGradient id="innerGrad" cx="50%" cy="50%">
+      <stop offset="0%" style="stop-color:#3d9ea5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2d7e85;stop-opacity:1" />
+    </radialGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Scalloped edge path -->
+  <path d="M 100,10
+    C 108,10 115,8 120,12
+    C 125,8 132,10 140,10
+    C 148,10 155,12 160,16
+    C 164,12 170,10 178,18
+    C 186,10 188,16 190,24
+    C 192,32 190,40 190,48
+    C 190,56 192,64 190,72
+    C 192,80 190,88 190,96
+    C 190,104 192,112 190,120
+    C 192,128 190,136 190,144
+    C 190,152 188,160 184,164
+    C 188,168 186,176 178,182
+    C 170,190 164,188 160,184
+    C 156,188 148,190 140,190
+    C 132,190 125,192 120,188
+    C 115,192 108,190 100,190
+    C 92,190 85,192 80,188
+    C 75,192 68,190 60,190
+    C 52,190 44,188 40,184
+    C 36,188 30,190 22,182
+    C 14,174 12,168 16,164
+    C 12,160 10,152 10,144
+    C 10,136 8,128 10,120
+    C 8,112 10,104 10,96
+    C 10,88 8,80 10,72
+    C 8,64 10,56 10,48
+    C 10,40 8,32 10,24
+    C 8,16 12,10 18,10
+    C 22,10 28,8 32,12
+    C 36,8 44,10 52,10
+    C 60,10 68,8 75,12
+    C 80,8 92,10 100,10 Z"
+    fill="url(#outerGrad)"
+    filter="url(#shadow)"/>
+
+  <!-- Inner circle -->
+  <circle cx="100" cy="100" r="76" fill="url(#innerGrad)"/>
+
+  <!-- Stars -->
+  <text x="80" y="50" font-size="18" fill="#fcd34d" font-family="Arial, sans-serif">★</text>
+  <text x="92" y="44" font-size="24" fill="#fcd34d" font-family="Arial, sans-serif">★</text>
+  <text x="108" y="50" font-size="18" fill="#fcd34d" font-family="Arial, sans-serif">★</text>
+
+  <!-- Main text - 3 lines -->
+  <text x="100" y="68" font-size="13" font-weight="600" fill="white" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif">Your Home</text>
+  <text x="100" y="82" font-size="13" font-weight="600" fill="white" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif">Sold or Your</text>
+  <text x="100" y="96" font-size="13" font-weight="600" fill="white" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif">Money Back</text>
+
+  <!-- Curved text path -->
+  <defs>
+    <path id="curve" d="M 30,115 Q 100,145 170,115" fill="transparent"/>
+  </defs>
+  <text font-size="11" font-weight="700" fill="white" font-family="system-ui, -apple-system, sans-serif" letter-spacing="0.5">
+    <textPath href="#curve" startOffset="50%" text-anchor="middle">
+      Satisfaction Guarantee
+    </textPath>
+  </text>
+</svg>
