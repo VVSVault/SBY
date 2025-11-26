@@ -1,9 +1,21 @@
 'use client';
 
+import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { LIST_MY_HOME_URL } from '@/lib/constants';
 
 export default function Hero() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    // Attempt to play the video when component mounts
+    if (videoRef.current) {
+      videoRef.current.play().catch((error) => {
+        console.log('Autoplay was prevented:', error);
+      });
+    }
+  }, []);
+
   return (
     <section className="relative text-white overflow-visible pb-48">
       {/* Background image */}
@@ -101,6 +113,7 @@ export default function Hero() {
           <div className="hidden md:block relative z-10 mt-16 ml-8">
             <div className="relative rounded-lg shadow-2xl overflow-hidden border-4 border-white transform scale-125">
               <video
+                ref={videoRef}
                 src="https://pub-723cf289193a4aaf99eb07deb8d15315.r2.dev/newherovideo.mp4"
                 autoPlay
                 loop
