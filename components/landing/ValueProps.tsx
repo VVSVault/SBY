@@ -9,8 +9,10 @@ export default function ValueProps() {
           </h2>
           <div className="max-w-4xl mx-auto mb-8 rounded-2xl overflow-hidden shadow-2xl">
             <video
-              src="https://pub-723cf289193a4aaf99eb07deb8d15315.r2.dev/sold_by_you.mp4"
+              src="https://pub-723cf289193a4aaf99eb07deb8d15315.r2.dev/sold_by_you%20(1440p).mp4"
               controls
+              preload="auto"
+              crossOrigin="anonymous"
               className="w-full h-auto"
             />
           </div>

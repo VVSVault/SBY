@@ -106,6 +106,8 @@ export default function Hero() {
                 loop
                 muted
                 playsInline
+                preload="auto"
+                crossOrigin="anonymous"
                 className="w-full h-auto"
               />
             </div>
