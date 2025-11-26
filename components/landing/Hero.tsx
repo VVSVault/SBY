@@ -101,7 +101,7 @@ export default function Hero() {
           <div className="hidden md:block relative z-10 mt-16 ml-8">
             <div className="relative rounded-lg shadow-2xl overflow-hidden border-4 border-white transform scale-125">
               <video
-                src="/newherovideo.mp4"
+                src="https://pub-723cf289193a4aaf99eb07deb8d15315.r2.dev/newherovideo.mp4"
                 autoPlay
                 loop
                 muted
