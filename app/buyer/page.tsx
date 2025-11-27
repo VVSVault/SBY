@@ -217,25 +217,25 @@ export default function BuyerDashboard() {
   };
 
   return (
-    <div className="p-8">
+    <div className="p-4 md:p-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Welcome Back!</h1>
-          <p className="text-gray-600 mt-1">Here's what's happening with your home search.</p>
+        <div className="mb-6 md:mb-8">
+          <h1 className="text-2xl md:text-3xl font-bold text-gray-900">Welcome Back!</h1>
+          <p className="text-gray-600 mt-1 text-sm md:text-base">Here's what's happening with your home search.</p>
         </div>
 
         {/* Active Transaction or Empty State */}
         {hasActiveTransaction ? (
-          <div className="bg-white rounded-lg shadow-md p-6 mb-8 border-l-4 border-green-500">
-            <div className="flex items-start justify-between mb-4">
+          <div className="bg-white rounded-lg shadow-md p-4 md:p-6 mb-6 md:mb-8 border-l-4 border-green-500">
+            <div className="flex flex-col sm:flex-row sm:items-start justify-between mb-4 gap-2">
               <div>
-                <h2 className="text-xl font-bold text-gray-900">Active Transaction</h2>
+                <h2 className="text-lg md:text-xl font-bold text-gray-900">Active Transaction</h2>
                 <p className="text-gray-600 text-sm mt-1">
                   {activeTransaction.listing?.address}, {activeTransaction.listing?.city}
                 </p>
               </div>
-              <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-semibold">
+              <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs md:text-sm font-semibold whitespace-nowrap self-start">
                 {activeTransaction.status.replace('_', ' ').toUpperCase()}
               </span>
             </div>
@@ -300,14 +300,14 @@ export default function BuyerDashboard() {
             </Link>
           </div>
         ) : (
-          <div className="bg-blue-50 border-2 border-blue-200 rounded-lg p-8 mb-8 text-center">
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">Ready to Find Your Dream Home?</h2>
-            <p className="text-gray-600 mb-6">
+          <div className="bg-blue-50 border-2 border-blue-200 rounded-lg p-6 md:p-8 mb-6 md:mb-8 text-center">
+            <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">Ready to Find Your Dream Home?</h2>
+            <p className="text-gray-600 mb-6 text-sm md:text-base">
               Start searching for homes, save your favorites, and make offers—all in one place.
             </p>
             <Link
               href="/buyer/search"
-              className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition font-semibold"
+              className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition font-semibold text-sm md:text-base"
             >
               Start Searching
             </Link>
@@ -315,40 +315,40 @@ export default function BuyerDashboard() {
         )}
 
         {/* Quick Stats */}
-        <div className="grid md:grid-cols-4 gap-6 mb-8">
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <div className="text-sm text-gray-600 mb-1">Saved Homes</div>
-            <div className="text-3xl font-bold text-gray-900">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6 mb-6 md:mb-8">
+          <div className="bg-white rounded-lg shadow-md p-4 md:p-6">
+            <div className="text-xs md:text-sm text-gray-600 mb-1">Saved Homes</div>
+            <div className="text-2xl md:text-3xl font-bold text-gray-900">
               {isLoadingSaved ? '-' : savedHomes.length}
             </div>
-            <Link href="/buyer/saved" className="text-[#406f77] text-sm hover:underline mt-2 inline-block">
+            <Link href="/buyer/saved" className="text-[#406f77] text-xs md:text-sm hover:underline mt-2 inline-block">
               View all →
             </Link>
           </div>
 
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <div className="text-sm text-gray-600 mb-1">Upcoming Showings</div>
-            <div className="text-3xl font-bold text-gray-900">
+          <div className="bg-white rounded-lg shadow-md p-4 md:p-6">
+            <div className="text-xs md:text-sm text-gray-600 mb-1">Upcoming Showings</div>
+            <div className="text-2xl md:text-3xl font-bold text-gray-900">
               {isLoadingShowings ? '-' : upcomingShowingsCount}
             </div>
-            <Link href="/buyer/showings" className="text-[#406f77] text-sm hover:underline mt-2 inline-block">
+            <Link href="/buyer/showings" className="text-[#406f77] text-xs md:text-sm hover:underline mt-2 inline-block">
               View all →
             </Link>
           </div>
 
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <div className="text-sm text-gray-600 mb-1">Active Offers</div>
-            <div className="text-3xl font-bold text-gray-900">
+          <div className="bg-white rounded-lg shadow-md p-4 md:p-6">
+            <div className="text-xs md:text-sm text-gray-600 mb-1">Active Offers</div>
+            <div className="text-2xl md:text-3xl font-bold text-gray-900">
               {isLoadingOffers ? '-' : activeOffersCount}
             </div>
-            <Link href="/buyer/offers" className="text-[#406f77] text-sm hover:underline mt-2 inline-block">
+            <Link href="/buyer/offers" className="text-[#406f77] text-xs md:text-sm hover:underline mt-2 inline-block">
               View all →
             </Link>
           </div>
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <div className="text-sm text-gray-600 mb-1">Transactions</div>
-            <div className="text-3xl font-bold text-gray-900">{hasActiveTransaction ? '1' : '0'}</div>
-            <Link href="/buyer/transactions" className="text-[#406f77] text-sm hover:underline mt-2 inline-block">
+          <div className="bg-white rounded-lg shadow-md p-4 md:p-6">
+            <div className="text-xs md:text-sm text-gray-600 mb-1">Transactions</div>
+            <div className="text-2xl md:text-3xl font-bold text-gray-900">{hasActiveTransaction ? '1' : '0'}</div>
+            <Link href="/buyer/transactions" className="text-[#406f77] text-xs md:text-sm hover:underline mt-2 inline-block">
               View all →
             </Link>
           </div>
@@ -356,10 +356,10 @@ export default function BuyerDashboard() {
 
         {/* Upcoming Showings */}
         {upcomingShowings.length > 0 && (
-          <div className="bg-white rounded-lg shadow-md p-6 mb-8">
+          <div className="bg-white rounded-lg shadow-md p-4 md:p-6 mb-6 md:mb-8">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-xl font-bold text-gray-900">Upcoming Showings</h2>
-              <Link href="/buyer/showings" className="text-[#406f77] hover:underline text-sm">
+              <h2 className="text-lg md:text-xl font-bold text-gray-900">Upcoming Showings</h2>
+              <Link href="/buyer/showings" className="text-[#406f77] hover:underline text-xs md:text-sm">
                 View all
               </Link>
             </div>
@@ -418,10 +418,10 @@ export default function BuyerDashboard() {
 
         {/* Recent Offers */}
         {recentOffers.length > 0 && (
-          <div className="bg-white rounded-lg shadow-md p-6 mb-8">
+          <div className="bg-white rounded-lg shadow-md p-4 md:p-6 mb-6 md:mb-8">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-xl font-bold text-gray-900">Recent Offers</h2>
-              <Link href="/buyer/offers" className="text-[#406f77] hover:underline text-sm">
+              <h2 className="text-lg md:text-xl font-bold text-gray-900">Recent Offers</h2>
+              <Link href="/buyer/offers" className="text-[#406f77] hover:underline text-xs md:text-sm">
                 View all
               </Link>
             </div>
@@ -485,14 +485,14 @@ export default function BuyerDashboard() {
 
         {/* Recent Saved Homes */}
         {recentSavedHomes.length > 0 && (
-          <div className="bg-white rounded-lg shadow-md p-6 mb-8">
+          <div className="bg-white rounded-lg shadow-md p-4 md:p-6 mb-6 md:mb-8">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-xl font-bold text-gray-900">Recently Saved</h2>
-              <Link href="/buyer/saved" className="text-[#406f77] hover:underline text-sm">
+              <h2 className="text-lg md:text-xl font-bold text-gray-900">Recently Saved</h2>
+              <Link href="/buyer/saved" className="text-[#406f77] hover:underline text-xs md:text-sm">
                 View all
               </Link>
             </div>
-            <div className="grid md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {recentSavedHomes.map((saved) => (
                 <Link
                   key={saved.id}

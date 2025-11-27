@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -89,53 +90,144 @@ const navigation = [
 
 export default function Sidebar() {
   const pathname = usePathname();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  // Close menu when route changes
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [pathname]);
+
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMobileMenuOpen]);
 
   return (
-    <aside className="w-64 bg-[#406f77] text-white h-screen flex flex-col fixed left-0 top-0 overflow-y-auto">
-      {/* Logo */}
-      <div className="p-6 border-b border-[#355c63] flex-shrink-0">
-        <Link href="/" className="flex items-center">
-          <img src="/sby-logo-new.png" alt="SoldByYou" className="h-24 w-auto" />
-        </Link>
-        <div className="text-xs text-gray-300 mt-2">Buyer Portal</div>
-      </div>
+    <>
+      {/* Mobile Header - Only visible on mobile */}
+      <header className="lg:hidden fixed top-0 left-0 right-0 bg-[#406f77] text-white z-50 shadow-md">
+        <div className="flex items-center justify-between px-4 py-3">
+          {/* Hamburger Button */}
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="p-2 hover:bg-[#355c63] rounded-lg transition"
+            aria-label="Toggle menu"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              {isMobileMenuOpen ? (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              ) : (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              )}
+            </svg>
+          </button>
 
-      {/* Navigation */}
-      <nav className="flex-1 p-4 overflow-y-auto">
-        <ul className="space-y-2">
-          {navigation.map((item) => {
-            const isActive = pathname === item.href || (item.href !== '/buyer' && pathname?.startsWith(item.href));
-            return (
-              <li key={item.name}>
-                <Link
-                  href={item.href}
-                  className={`flex items-center space-x-3 px-4 py-3 rounded-lg transition ${
-                    isActive
-                      ? 'bg-[#5DD5D9] text-gray-900'
-                      : 'text-gray-200 hover:bg-[#355c63] hover:text-white'
-                  }`}
-                >
-                  {item.icon}
-                  <span className="font-medium">{item.name}</span>
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-      </nav>
+          {/* Logo */}
+          <Link href="/" className="flex items-center">
+            <img src="/sby-logo-new.png" alt="SoldByYou" className="h-10 w-auto" />
+          </Link>
 
-      {/* User Section */}
-      <div className="p-4 border-t border-[#355c63] flex-shrink-0">
-        <div className="flex items-center space-x-3 px-4 py-3">
-          <div className="w-10 h-10 bg-[#355c63] rounded-full flex items-center justify-center">
-            <span className="text-sm font-semibold">JD</span>
-          </div>
-          <div className="flex-1">
-            <div className="text-sm font-medium">John Doe</div>
-            <div className="text-xs text-gray-300">Buyer Account</div>
+          {/* User Avatar */}
+          <div className="w-9 h-9 bg-[#355c63] rounded-full flex items-center justify-center">
+            <span className="text-xs font-semibold">JD</span>
           </div>
         </div>
-      </div>
-    </aside>
+      </header>
+
+      {/* Mobile Backdrop */}
+      {isMobileMenuOpen && (
+        <div
+          className="lg:hidden fixed inset-0 bg-black/50 z-40"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+      )}
+
+      {/* Sidebar - Desktop: fixed sidebar, Mobile: slide-out drawer */}
+      <aside
+        className={`
+          fixed top-0 left-0 h-screen bg-[#406f77] text-white flex flex-col overflow-y-auto z-50
+          lg:w-64 w-80 max-w-[85vw]
+          transition-transform duration-300 ease-in-out
+          ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
+        `}
+      >
+        {/* Logo - Desktop only (mobile shows in header) */}
+        <div className="hidden lg:block p-6 border-b border-[#355c63] flex-shrink-0">
+          <Link href="/" className="flex items-center">
+            <img src="/sby-logo-new.png" alt="SoldByYou" className="h-24 w-auto" />
+          </Link>
+          <div className="text-xs text-gray-300 mt-2">Buyer Portal</div>
+        </div>
+
+        {/* Mobile: User info at top with close button */}
+        <div className="lg:hidden p-4 border-b border-[#355c63] flex-shrink-0">
+          <div className="flex items-center justify-between px-2 py-3">
+            <div className="flex items-center space-x-3">
+              <div className="w-12 h-12 bg-[#355c63] rounded-full flex items-center justify-center">
+                <span className="text-sm font-semibold">JD</span>
+              </div>
+              <div className="flex-1">
+                <div className="text-sm font-medium">John Doe</div>
+                <div className="text-xs text-gray-300">Buyer Account</div>
+              </div>
+            </div>
+            {/* Close button - top right of sidebar */}
+            <button
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="p-2 hover:bg-[#355c63] rounded-lg transition"
+              aria-label="Close menu"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        {/* Navigation */}
+        <nav className="flex-1 p-4 overflow-y-auto">
+          <ul className="space-y-2">
+            {navigation.map((item) => {
+              const isActive = pathname === item.href || (item.href !== '/buyer' && pathname?.startsWith(item.href));
+              return (
+                <li key={item.name}>
+                  <Link
+                    href={item.href}
+                    className={`flex items-center space-x-3 px-4 py-3 rounded-lg transition ${
+                      isActive
+                        ? 'bg-[#5DD5D9] text-gray-900'
+                        : 'text-gray-200 hover:bg-[#355c63] hover:text-white'
+                    }`}
+                  >
+                    {item.icon}
+                    <span className="font-medium">{item.name}</span>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
+
+        {/* User Section - Desktop only */}
+        <div className="hidden lg:block p-4 border-t border-[#355c63] flex-shrink-0">
+          <div className="flex items-center space-x-3 px-4 py-3">
+            <div className="w-10 h-10 bg-[#355c63] rounded-full flex items-center justify-center">
+              <span className="text-sm font-semibold">JD</span>
+            </div>
+            <div className="flex-1">
+              <div className="text-sm font-medium">John Doe</div>
+              <div className="text-xs text-gray-300">Buyer Account</div>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </>
   );
 }
